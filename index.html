@@ -351,6 +351,27 @@
             margin-bottom: 48px;
         }
 
+        .modal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: -32px;
+            margin-bottom: 48px;
+            padding: 8px 16px;
+            background: rgba(116, 96, 151, 0.05);
+            border-radius: 20px;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .modal-link:hover {
+            background: rgba(116, 96, 151, 0.1);
+            transform: translateY(-1px);
+        }
+
         .modal-block {
             margin-bottom: 36px;
         }
@@ -757,6 +778,7 @@
                 desc: '整合教务底层数据，构建适配移动端的全场景智能排程与自习资源动态索引系统。', 
                 type: 'modal',
                 modalTitle: 'BnB Scheduler：校园全场景智能排程与资源管理平台',
+                link: 'https://www.bnbscheduler.top',
                 companyName: '全场景智能排程与资源管理平台',
                 period: '2026.01 - 至今',
                 bgTitle: '项目背景（基于学生痛点设计）',
@@ -813,6 +835,10 @@
                     ),
                     e('div', { className: 'modal-right' },
                         e('h2', { className: 'modal-title' }, project.modalTitle),
+                        project.link && e('a', { className: 'modal-link', href: project.link, target: '_blank', rel: 'noopener noreferrer' }, 
+                            e(Icons.Globe),
+                            project.link.replace('https://', '')
+                        ),
                         project.details && project.details.map((item, idx) => e('div', { key: idx, className: 'modal-block' },
                             e('div', { className: 'modal-block-h' },
                                 e('span', { className: 'modal-block-dot' }, '•'),
