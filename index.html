@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="bg-white">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陈欣禧 | Professional Portfolio</title>
+    <!-- Fonts -->
+    <!-- Using Apple Native System Fonts -->
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+
+    <style>
+        /* --- DESIGN SYSTEM V29 (Restored De-blocked Typographic Sidebar) --- */
+        :root {
+            --bg-body: #FFFFFF;
+            --bg-side: #FBF8FB;
+
+            --color-side-text: #37313D;
+            --color-black: #1D1D1F;
+            --color-grey: #8E8E93;
+
+            --color-primary: #746097;
+            --color-secondary: #AD86AE;
+
+            --color-border: rgba(116, 96, 151, 0.12);
+
+            --sidebar-width: 320px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(116, 96, 151, 0.2);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(116, 96, 151, 0.4);
+        }
+
+        html,
+        body {
+            background-color: var(--bg-body);
+            color: var(--color-black);
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: auto;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-display {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+            color: var(--color-primary);
+        }
+
+        /* --- FLUID INTERACTIVE CURSOR EFFECTS --- */
+
+        .trail-petal {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            background-color: var(--color-secondary);
+            border-radius: 50% 50% 50% 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+        }
+
+        .bloom-petal {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: var(--color-primary);
+            border-radius: 50% 50% 50% 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.5s ease-out;
+        }
+
+        /* -------------------------------------------
+           SIDEBAR (Pure Typed Typography Layout)
+           ------------------------------------------- */
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background: var(--bg-side);
+            padding: 80px 48px;
+            display: flex;
+            flex-direction: column;
+            z-index: 40;
+            overflow: hidden;
+            border-right: 1px solid rgba(116, 96, 151, 0.04);
+        }
+
+        .side-title-section {
+            margin-bottom: 56px;
+        }
+
+        .side-title-section h1 {
+            font-size: 34px;
+            font-weight: 800;
+            /* 按照要求：名字颜色为深紫色 */
+            color: #3D2D56;
+            letter-spacing: 0.02em;
+            margin-bottom: 12px;
+        }
+
+        .profile-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-secondary);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .side-section {
+            margin-bottom: 36px;
+        }
+
+        .side-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--color-primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .side-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-side-text);
+            margin-bottom: 6px;
+            line-height: 1.5;
+            letter-spacing: 0.02em;
+        }
+
+        /* -------------------------------------------
+           MAIN CONTENT
+           ------------------------------------------- */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            background: var(--bg-body);
+        }
+
+        /* Navigation */
+        .nav-bar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 30;
+            padding: 0 56px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .nav-btn {
+            margin-right: 48px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--color-grey);
+            background: none;
+            border: none;
+            transition: all 0.2s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-btn.active,
+        .nav-btn:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--color-primary);
+        }
+
+        /* Grid */
+        .project-grid {
+            padding: 40px 56px 80px 56px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .project-card {
+            background: var(--bg-body);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--color-border);
+            box-shadow: none;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(116, 96, 151, 0.12);
+            border-color: rgba(116, 96, 151, 0.25);
+        }
+
+        .p-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+
+        .p-desc {
+            font-size: 15px;
+            color: var(--color-black);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .card-icon-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            color: var(--color-primary);
+        }
+
+        /* -------------------------------------------
+           MODAL
+           ------------------------------------------- */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(44, 37, 51, 0.4);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .modal-card {
+            width: 85%;
+            max-width: 1200px;
+            height: 80vh;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 32px 80px rgba(44, 37, 51, 0.2);
+            display: flex;
+            animation: modalIn 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.98) translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-left {
+            width: 35%;
+            background: var(--bg-side);
+            padding: 64px 48px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .modal-right {
+            width: 65%;
+            background: var(--bg-body);
+            padding: 64px 56px;
+            overflow-y: auto;
+        }
+
+        .modal-left-h {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+
+        .modal-left-meta {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--color-black);
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .modal-left-bg {
+            margin-top: 16px;
+        }
+
+        .modal-left-bg-title {
+            font-size: 13px;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+            letter-spacing: 0.05em;
+        }
+
+        .modal-left-bg-content {
+            font-size: 15px;
+            color: var(--color-black);
+            line-height: 1.6;
+            opacity: 0.9;
+            white-space: pre-wrap;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-bottom: 48px;
+        }
+
+        .modal-block {
+            margin-bottom: 36px;
+        }
+
+        .modal-block-h {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-block-dot {
+            color: var(--color-primary);
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .modal-block-p {
+            font-size: 15px;
+            color: var(--color-black);
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: var(--bg-body);
+            border: 1px solid var(--color-border);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            z-index: 10;
+            color: var(--color-primary);
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background: var(--bg-side);
+            transform: rotate(90deg) scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script>
+        const { useState, useMemo, useEffect, createElement: e } = React;
+
+        const useCursor = () => {
+            useEffect(() => {
+                const fxContainer = document.createElement('div');
+                fxContainer.style.position = 'fixed';
+                fxContainer.style.inset = '0';
+                fxContainer.style.pointerEvents = 'none';
+                fxContainer.style.zIndex = '9998';
+                document.body.appendChild(fxContainer);
+
+                let lastMouseX = window.innerWidth / 2;
+                let lastMouseY = window.innerHeight / 2;
+                let lastTrailTime = 0;
+
+                const createTrail = (x, y) => {
+                    const petal = document.createElement('div');
+                    petal.className = 'trail-petal';
+                    petal.style.left = x + 'px';
+                    petal.style.top = y + 'px';
+                    fxContainer.appendChild(petal);
+
+                    const rot = Math.random() * 60 - 30;
+                    petal.style.transform = `translate(-50%, -50%) scale(0.8) rotate(${rot}deg)`;
+                    petal.style.opacity = '0.7';
+
+                    void petal.offsetWidth;
+
+                    petal.style.transform = `translate(-50%, calc(-50% + 14px)) scale(0) rotate(${rot + 40}deg)`;
+                    petal.style.opacity = '0';
+
+                    setTimeout(() => { if (fxContainer.contains(petal)) petal.remove(); }, 600);
+                };
+
+                const createBloom = (x, y) => {
+                    const numPetals = 5;
+                    const radius = 8;
+                    for (let i = 0; i < numPetals; i++) {
+                        const petal = document.createElement('div');
+                        petal.className = 'bloom-petal';
+                        petal.style.left = x + 'px';
+                        petal.style.top = y + 'px';
+
+                        const angle = i * (360 / numPetals);
+                        petal.style.transform = `translate(-50%, -50%) scale(0) rotate(${angle}deg)`;
+                        fxContainer.appendChild(petal);
+
+                        void petal.offsetWidth;
+
+                        const tx = Math.cos(angle * Math.PI / 180) * radius;
+                        const ty = Math.sin(angle * Math.PI / 180) * radius;
+                        const finalRot = angle + 45;
+
+                        petal.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1.1) rotate(${finalRot}deg)`;
+                        petal.style.opacity = '0';
+
+                        setTimeout(() => { if (fxContainer.contains(petal)) petal.remove(); }, 500);
+                    }
+                };
+
+                const onMouseMove = (ev) => {
+                    lastMouseX = ev.clientX;
+                    lastMouseY = ev.clientY;
+
+                    const now = Date.now();
+                    if (now - lastTrailTime > 40) {
+                        createTrail(lastMouseX, lastMouseY);
+                        lastTrailTime = now;
+                    }
+                };
+
+                const onMouseDown = (ev) => {
+                    createBloom(ev.clientX, ev.clientY);
+                };
+
+                window.addEventListener('mousemove', onMouseMove);
+                window.addEventListener('mousedown', onMouseDown);
+
+                return () => {
+                    window.removeEventListener('mousemove', onMouseMove);
+                    window.removeEventListener('mousedown', onMouseDown);
+                    if (document.body.contains(fxContainer)) fxContainer.remove();
+                };
+            }, []);
+        };
+
+        const Icons = {
+            Close: () => e('svg', { width: 16, height: 16, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2.5", strokeLinecap: "round", strokeLinejoin: "round" }, e('line', { x1: "18", y1: "6", x2: "6", y2: "18" }), e('line', { x1: "6", y1: "6", x2: "18", y2: "18" })),
+            ArrowUpRight: () => e('svg', { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round" }, e('line', { x1: "7", y1: "17", x2: "17", y2: "7" }), e('polyline', { points: "7 7 17 7 17 17" })),
+            Globe: () => e('svg', { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5" }, e('circle', { cx: "12", cy: "12", r: "10" }), e('path', { d: "M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" })),
+            Leaf: () => e('svg', { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5" }, e('path', { d: "M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" })),
+            ShoppingBag: () => e('svg', { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5" }, e('path', { d: "M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" })),
+            BarChart: () => e('svg', { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5" }, e('line', { x1: "12", y1: "20", x2: "12", y2: "10" }), e('line', { x1: "18", y1: "20", x2: "18", y2: "4" }), e('line', { x1: "6", y1: "20", x2: "6", y2: "16" })),
+            Cpu: () => e('svg', { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5" }, e('rect', { x: "4", y: "4", width: "16", height: "16", rx: "2" })),
+            Wand: () => e('svg', { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5" }, e('path', { d: "m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.21 1.21 0 0 0 1.72 0L21.64 5.36a1.21 1.21 0 0 0 0-1.72Z" })),
+            Sparkles: () => e('svg', { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5" }, e('path', { d: "m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1-1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" })),
+            MapPin: () => e('svg', { width: 26, height: 26, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "1.5", strokeLinecap: "round", strokeLinejoin: "round" }, e('path', { d: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" }), e('circle', { cx: "12", cy: "10", r: "3" }))
+        };
+
+        const PROJECT_DATA = [
+            {
+                id: 'mr-1',
+                category: '市场调研与战略',
+                title: 'Go Terra 市场分析实习',
+                desc: '搜集非洲市场准入信息，协助 AI 房地产平台的市场评估与竞品财务对标。',
+                type: 'modal',
+                modalTitle: 'Go Terra 市场研究实习',
+                companyName: '天逻科技（广州）有限公司 / Go Terra',
+                period: '2025.06 - 2025.09',
+                role: '市场研究实习生',
+                background: '前阿里巴巴成员组建，针对非洲房地产市场搭建智能 AI 房地产平台的初创公司。',
+                details: [
+                    { h: '区域市场多维画像', p: '搜集并整理非洲国家、城市及具体街区的经济数据与基建信息。汇总形成多份区域分析报告，协助公司评估市场准入标准，筛选具有增长潜力的落地街区。' },
+                    { h: '竞品财务对标研究', p: '对标贝壳、Zillow等全球上市房地产平台，通过分析其招股书与财报，使用 Excel 构建财务数据对标总表。从获客成本、佣金模式等维度对比分析竞品的商业逻辑。' },
+                    { h: '行业政策与法律梳理', p: '系统性收集并整理非洲房地产相关的政策规定与法律条款，建立基础政策数据库，为公司产品功能开发提供合规参考。' }
+                ],
+                icon: 'Globe'
+            },
+            {
+                id: 'mr-2',
+                category: '市场调研与战略',
+                title: '毕马威 (KPMG) ESG 商业挑战赛',
+                desc: '为香港头部快消企业制定三年 ESG 转型战略，通过数据建模实现 30% 以上的供应链减排。',
+                type: 'modal',
+                modalTitle: '毕马威 (KPMG) ESG 商业挑战赛',
+                companyName: '香港某快消品牌三年 ESG 战略',
+                period: '2025.10 - 2025.11',
+                bgTitle: '项目背景',
+                background: '针对 ABC 时尚有限公司复杂的跨国供应链，制定以降本减排、稳固供应链为核心的三年供应商参与策略。',
+                details: [
+                    { h: '数据驱动的减排逻辑', p: '通过对原材料全生命周期进行碳核算，识别出皮革与羽绒为核心高碳源（碳强度达常规棉花 7-13 倍）。构建减排模型，证实通过回收替代方案可直接降低原材料总碳排 30%-36%。' },
+                    { h: '供应商分层管理体系', p: '基于“战略重要性-低碳能力”维度构建四象限分类矩阵。提出将供应商低碳绩效与订单量挂钩，对标杆供应商给予 10-15% 的订单倾斜，实现业务与 ESG 的正向循环。' },
+                    { h: '三年转型路径设计', p: '对标优衣库（Uniqlo）最佳实践，分阶段落地可量化目标。规划在三年内实现 100% 可持续棉花采购，并将皮革/羽绒的回收替代占比提升至 50%/40%。' },
+                    { h: '风险管理与竞争优势', p: '识别单一供应商依赖及合规风险，制定全球分散采购与成本优化策略。方案预计在减排的同时，使供应链稳定性提升 20-25%，成本竞争力提升 5-7%。' }
+                ],
+                icon: 'Leaf'
+            },
+            {
+                id: 'mr-3',
+                category: '市场调研与战略',
+                title: '美团商业分析精英大赛',
+                desc: '构建基于 LLM-Agent 的“旅途智券”动态策略框架，优化异地出行场景补贴效率与核销率。',
+                type: 'modal',
+                modalTitle: '美团商业分析精英大赛：旅途智券系统',
+                companyName: '美团-异地出行全链路动态激励系统',
+                period: '2025.12 - 2026.04',
+                bgTitle: '项目背景',
+                background: '本项目聚焦美团“长链路、高价值”的异地出行场景，针对补贴策略割裂及核销率低的业务痛点 。通过描摹用户在“规-订-游-结”全过程的消费动线打破数据孤岛，设计出一套能精准捕捉即时需求、驱动多业态协同增长的动态激励系统 。',
+                details: [
+                    { h: '人群画像精准解码', p: '针对异地场景标签稀缺问题，利用大模型语义解析生成弱监督标签，实现对商旅、亲子等五类人群的识别。模型 Top-2 准确率达 86%，为精细化运营奠定人群基础。' },
+                    { h: '全链路时机捕捉', p: '聚焦“规-订-游-结”生命周期，重点识别用户“入住后”黄金窗口的连带需求。通过行为序列建模，候选需求预测 Recall@3 达 92%，实现精准场景触发。' },
+                    { h: '跨业态关联决策', p: '利用 FP-Growth 算法挖掘“酒店+X”联动特征，识别出“到餐+外卖→闪购”等高关联组合。Top-5 关联规则平均 Lift 达 1.27，有效驱动平台多业务协同增长。' },
+                    { h: '补贴效率极限优化', p: '构建“目的 × 预算 × 阶段”三维动态补贴框架。测算显示，方案可将全局核销率提升至 63.7%，高响应用户单均 GMV 增量达 13.7 元。' }
+                ],
+                icon: 'MapPin'
+            },
+            {
+                id: 'mr-4',
+                category: '市场调研与战略',
+                title: 'WPC门市场调研分析',
+                desc: '通过定量问卷与定性访谈，剖析新型环保建材市场潜力并提供量化定价策略支持。',
+                type: 'modal',
+                modalTitle: 'WPC 门市场调研分析',
+                companyName: 'CMAU 市场研究与商业策划大赛',
+                period: '2025.03 - 2025.05',
+                bgTitle: '项目背景',
+                background: '本项目针对 WPC（木塑复合材料）门这一新型环保建材，通过定量问卷与定性访谈相结合的研究方法，剖析消费者的认知度、购买偏好及市场潜力，为小微企业的产品研发与定价策略提供量化决策支撑。',
+                details: [
+                    { h: '多维问卷设计与样本洞察', p: '主导设计涵盖认知渠道、购买驱动力及功能期望的定量问卷，通过 Credamo 平台精准获取有效样本。数据分析显示 18-25 岁年轻群体占总样本近 50%，为品牌年轻化战略提供了数据依据。' },
+                    { h: '价格敏感度与消费行为画像', p: '识别出 300-600 元为市场接受度最高的价格区间（占比 33%），并挖掘出 75.01% 的用户高复购意愿。这验证了产品在中低价位市场的强竞争力，为企业优化定价结构提供了直接参考。' },
+                    { h: '定性访谈与供应链交叉验证', p: '深度访谈制造商产品经理与 B 端采购用户，拆解出树脂粉（占原料成本 40%）为核心成本项。将市场端对“价格偏高”的反馈与生产端成本结构进行闭环验证，提出轻量化与模具标准化的降本方案。' },
+                    { h: '产品升级与功能需求预测', p: '调研精准捕捉到消费者对“个性化定制”与“易清洁表面”的强诉求。基于此数据发现，建议企业从基础耐用性向高附加值功能升级，以拓展 1500 元以上的高端市场份额。' }
+                ],
+                icon: 'BarChart'
+            },
+            {
+                id: 'mkt-0',
+                category: '营销策划与运营',
+                title: '唐家湾茶果项目',
+                desc: '采用“非遗+产业”模式，运用增长理论落地“线上礼盒+线下体验”闭环营销策划。',
+                type: 'modal',
+                modalTitle: '花“菓”飘香非遗商业化',
+                companyName: '第十五届全国大学生“三创赛”',
+                period: '2024.12 - 2025.03',
+                bgTitle: '项目背景',
+                background: '针对非遗“唐家湾茶果”认知度低、短保等痛点，以“非遗+产业”模式主推涵盖市场调研、财务测算等九大板块策划，实现线上下闭环营销，获校级三等奖。',
+                details: [
+                    { h: '多维市场分析与精准定位', p: '主导 SWOT 及环境分析，实地探访“那州”村等线下老店进行价格与菜单调研。针对 18-35 岁潮流群体（占比 65%）精准刻画画像，确立了“文化传承 × 美景美食 × 手作体验”的核心价值主张。' },
+                    { h: '“荷花定律 × 涟漪理论”营销框架', p: '运用增长理论设计营销路径，通过内容沉淀（前期积累）与口碑传播（信任扩散）实现流量转化。策划“唐家湾茶果创新挑战赛”及节气打卡活动，利用小红书平台驱动高质量 UGC 产出与品牌种草。' },
+                    { h: '定制化小程序闭环设计', p: '主导“花菓飘香”小程序的逻辑设计与落地，实现产品自由搭配礼盒（4/6 件装）及在线下单。引入“尝鲜盲盒”及“非遗守艺人”会员体系，通过分享有礼等社交裂变机制有效降低获客成本。' },
+                    { h: '供应链优化与战略落地', p: '针对产品短保难题，提出运用气调保鲜技术解决长距离运输，打破地域流通限制。制定了从大湾区深耕到全国推广的三阶段战略路径，并完成了详细的资产负债表测算与盈亏平衡分析。' }
+                ],
+                icon: 'Leaf'
+            },
+            {
+                id: 'mkt-1',
+                category: '营销策划与运营',
+                title: '“彼优彼选”电商',
+                desc: '构建校园电商后台监测体系，通过核心指标追踪驱动商家管理及补贴策略优化。',
+                type: 'modal',
+                modalTitle: '校园电商平台“彼优彼选”',
+                companyName: '珠海市润传校园文化媒体有限公司',
+                period: '2025.10 - 至今',
+                bgTitle: '项目背景',
+                background: '本项目借鉴美团“本地生活”模式，构建面向本校学生的场景化电商平台。作为运营团队的数据中枢，主要负责后台数据监测与用户行为分析，通过量化指标为平台的商家管理及营销决策提供科学支撑。',
+                details: [
+                    { h: '全链路后台监测与异常识别', p: '建立平台核心指标（DAU、转化率、留存率）的日常监测体系。通过实时追踪后台数据，输出用户行为分析报告，精准识别校园高频消费动线及潜在流失环节。' },
+                    { h: '数据驱动的商家及品类筛选', p: '基于订单量、客单价及复购频次等维度建立商家评估模型。通过对后台经营数据的深度挖掘，辅助团队动态优化商品上架结构，实现校园服务供给的精细化迭代。' },
+                    { h: '策略效果评估与补贴优化', p: '负责对消费券发放及签到奖励机制进行量化评估。通过对比不同补贴额度下的用户响应差异，实时反馈补贴效率，为提升用户黏性与复购率提供策略优化建议。' }
+                ],
+                icon: 'ShoppingBag'
+            },
+            {
+                id: 'mkt-2',
+                category: '营销策划与运营',
+                title: '可口可乐营销大赛',
+                desc: '针对校园小众饮品市场，通过“特调”大赛与互动营销机制强化品牌年轻化标签。',
+                type: 'modal',
+                modalTitle: '小众品牌“特调”大赛创新营销',
+                companyName: '可口可乐营销策划大赛',
+                period: '2024.09 - 2024.12',
+                bgTitle: '项目背景',
+                background: '本项目针对可口可乐旗下小众品牌知名度低及经典品牌“厌倦感”的问题，通过在校园举办“饮品特调大赛”，利用互动营销增强大学生与品牌的情感连接，在提升销量的同时强化品牌年轻化形象。',
+                details: [
+                    { h: '“焕然一新”宗旨的场景化落地”', p: '通过举办饮品特调大赛，打破瓶装饮料不及奶茶店的刻板印象。利用选手在练习调配过程中产生的持续购买行为，直接带动了小众产品在校园市场的短期销量增长。' },
+                    { h: 'O2O 社交互动传播机制', p: '将线上话题传播与线下赛事联动，通过观众的自发分享实现免费媒体曝光。在决赛现场邀请校园社团表演活跃气氛，构建了深度沉浸的品牌互动场景。' },
+                    { h: '品牌年轻化形象焕新', p: '通过“互动营销”方法调整大学生对经典品牌的固有看法，强化“快乐、分享、年轻感”的品牌标签，有效提升了品牌在年轻主力消费军中的情感粘性。' },
+                    { h: '全流程商业可行性方案', p: '产出涵盖市场分析、用户画像、分阶段执行路径及效果评估的完整策划报告。针对Z世代客群追求新奇的需求，设计了标准化的特调评测指标与奖项激励机制。' }
+                ],
+                icon: 'Sparkles'
+            },
+            {
+                id: 'mkt-3',
+                category: '营销策划与运营',
+                title: '阿迪达斯新产品营销方案',
+                desc: '定义 AI 运动智能眼镜核心功能，制定博主矩阵驱动及数字化社群闭环营销路径。',
+                type: 'modal',
+                modalTitle: 'AI运动智能眼镜',
+                companyName: '阿迪达斯 (Adidas) × 科技硬件公司：AI 运动智能眼镜产品定义与营销方案',
+                period: '2026.04 - 2026.05',
+                bgTitle: '项目背景',
+                background: '针对专业跑者及健身爱好者在运动中需频繁查看手机数据、缺乏即时专业纠偏的痛点。本项目提议阿迪达斯与头部硬件公司合作，定义一款以“AI 虚拟教练”为核心、辅以 AR 视觉呈现的智能运动眼镜。通过 AI 实时语音指导与 HUD 数据显示，打造沉浸式的数字化运动闭环，实现对纯 AI 眼镜及传统穿戴设备的跨维度竞争。',
+                details: [
+                    { h: 'AI 优先的产品功能定义', p: '界定产品核心卖点为“实时 AI 运动私教”。利用 AI 算法对运动步频、呼吸节奏进行监测并提供即时语音指导；AR 功能仅作为辅助支撑，用于在视野上方悬浮显示心率、配速等关键指标，确保用户在运动过程中无需中断动作即可掌握核心数据。' },
+                    { h: '博主矩阵驱动的 GTM 策略', p: '策划以“深度测评”为核心的到访市场路径。摒弃传统的运动员代言模式，聚焦于“科技类博主”与“硬核运动博主”的双重矩阵。通过技术博主拆解 AI 芯片与算法精度，运动博主分享实际场景下的 AI 语音指导体验，以真实的测评内容建立品牌信任并驱动转化。' },
+                    { h: '数字化社群与运营闭环', p: '规划智能眼镜与 Adidas Running (Runtastic) 原生 App 的底层数据互通。设计基于 AI 运动数据的社区挑战赛，通过 App 端的积分激励与社交裂变机制，提升硬件产品的用户粘性，并以此为切入口探索“硬件 + 数字化内容服务”的长期盈利模式。' },
+                    { h: '竞品对标与市场定位分析', p: '主导开展基于感知图谱的竞争分析，明确产品在“强 AI 交互”维度上的差异化优势。分析如何通过阿迪达斯的运动品牌溢价与合作伙伴的硬件技术背书，在 2000-3000 元价位段精准拦截原本计划购买高端运动手表或入门级 AI 眼镜的目标客群。' }
+                ],
+                icon: 'Wand'
+            },
+            {
+                id: 'qa-1',
+                category: '数据科学与分析',
+                title: '2026 美赛 (MCM) 数模比赛',
+                desc: '构建 MCMC 模型逆向推断粉丝投票分布，设计动态 Z-Score 融合系统优化赛事公平性。',
+                type: 'modal',
+                modalTitle: 'DWTS 投票机制多维量化分析与创新建议',
+                companyName: '2026 美国大学生数学建模竞赛 (MCM)',
+                period: '2026.01',
+                bgTitle: '项目背景',
+                background: '本项目针对真人秀节目《与星共舞》（DWTS）中评委专业评分与粉丝偏好之间的平衡难题，通过构建数学模型逆向推导非公开的粉丝投票分布。旨在评估不同投票规则的公平性，并设计一套兼顾竞技完整性与观众参与度的动态融合激励系统。',
+                details: [
+                    { h: '基于 MCMC 的贝叶斯逆向推断建模', p: '针对粉丝投票数据不透明的痛点，采用狄利克雷分布（Dirichlet distribution）作为先验，利用马尔可夫链蒙特卡罗（MCMC）采样技术构建推断模型。模型对 34 个赛季的粉丝投票份额估算准确率达 97.35%，一致性达 98.21%。' },
+                    { h: '投票规则偏误的平衡性评估', p: '通过反事实分析对比“排名百分比”与“原始分数百分比”两种规则的差异，量化评估不同机制对评委权重与粉丝偏好的影响。研究发现百分比法显著放大了粉丝偏好，据此定义了“观众影响力指数”以识别潜在的竞技不公。' },
+                    { h: '多维度表现驱动力挖掘', p: '利用梯度提升决策树（GBDT）算法拆解职业舞者与明星选手的表现驱动因素，识别出影响晋级率的核心特征。通过特征工程分析历史赛季数据，揭示了不同背景选手在特定投票机制下的获胜概率差异。' },
+                    { h: '动态 Z-Score 融合系统创新设计', p: '针对现有规则缺陷，创新性地提出并验证了“动态 Z-Score 融合系统”。该系统通过标准化处理平衡不同维度的评分量级，有效解决了竞技公平与商业流量之间的冲突，为赛事规则优化提供了量化依据。' }
+                ],
+                icon: 'BarChart'
+            },
+            { 
+                id: 'qa-2', 
+                category: '数据科学与分析', 
+                title: 'SQL 酒店订单系统', 
+                desc: '主导酒店后台订单查询系统底层架构，通过规范化逻辑建模实现高效检索。', 
+                type: 'modal',
+                modalTitle: 'SQL 酒店订单查询系统开发',
+                companyName: '底层数据库架构与 SQL 查询逻辑开发',
+                period: '2024.11 - 2024.12',
+                bgTitle: '项目背景',
+                background: '针对酒店预订业务的数字化管理需求，主导开发了一套高效的后台订单查询系统。通过搭建规范化的底层数据库架构，实现了从多维数据检索到前端结果呈现的完整技术闭环，提升了业务数据的处理与决策效率。',
+                details: [
+                    { h: '数据库架构设计与规范化', p: '负责酒店预订系统的概念设计与逻辑建模，完成核心 E-R 图绘制及数据表结构搭建。通过三范式规范化处理，确保了底层数据存储的高效性与扩展性。' },
+                    { h: 'SQL 查询逻辑开发', p: '主导核心业务逻辑的 SQL 编写，涵盖订单多条件筛选、实时库存校验及多表关联聚合分析。通过查询语句优化与索引设置，显著提升了大规模数据下的检索响应速度。' },
+                    { h: '全栈模块集成与系统联动', p: '配合前端 HTML 页面完成数据接口调用与系统集成，实现了预订订单的一站式高效检索。将枯燥的底层数据转化为直观的查询结果，验证了系统在实际业务场景中的应用价值。' }
+                ],
+                icon: 'Cpu' 
+            },
+            { 
+                id: 'qa-3', 
+                category: '数据科学与分析', 
+                title: '机器学习：基于 CNN 的服装图像识别模型', 
+                desc: '构建基于 Fashion-MNIST 的多层卷积神经网络，实现自动化服装分类。', 
+                type: 'modal',
+                modalTitle: '机器学习：基于 CNN 的服装图像识别模型',
+                companyName: 'Fashion-MNIST 数据集深度学习实战',
+                period: '2025.11 - 2025.12',
+                bgTitle: '项目背景',
+                background: '基于 Fashion-MNIST 数据集，利用深度学习技术实现对 10 类服装产品的自动化分类识别。项目重点在于通过卷积神经网络（CNN）自动提取图像特征，解决传统机器学习在图像处理中特征工程繁琐且泛化能力弱的问题。',
+                details: [
+                    { h: '网络架构设计', p: '自主构建多层 CNN 模型，包含多组卷积层 (Conv) 与最大池化层 (MaxPooling) 以提取空间特征，并使用 Dropout 层防止训练过程中的过拟合现象。' },
+                    { h: '训练与参数优化', p: '采用 Adam 优化器与交叉熵损失函数 (Cross-Entropy Loss)。通过设置验证集进行超参数调优（如 Batch Size、学习率衰减），在保证收敛速度的同时提升了模型的泛化精度。' },
+                    { h: '性能评估与分析', p: '模型在测试集上的识别准确率达到 90.6%。通过分析混淆矩阵发现模型对“衬衫”与“外套”等相似类别的区分难点，并以此为依据进一步优化了网络深度。' }
+                ],
+                icon: 'Cpu' 
+            },
+            { 
+                id: 'qa-4', 
+                category: '数据科学与分析', 
+                title: '移动游戏关卡策略 A/B Test', 
+                desc: '使用 R 语言处理海量玩家行为数据，通过 Bootstrap 与假设检验分析关卡锁定对留存率的影响。', 
+                type: 'modal',
+                modalTitle: '移动游戏关卡策略 A/B Test',
+                companyName: '移动游戏关卡策略 A/B Test：基于 Cookie Cats 数据的留存研究',
+                period: '2025.11 - 2025.12',
+                bgTitle: '项目背景',
+                background: '针对手游中“关卡锁定（Gate）”位置对用户生命周期的影响，利用 9 万余名玩家的真实行为数据，验证将解锁关卡从 Level 30 推迟至 Level 40 对用户留存与参与度的实际影响。',
+                details: [
+                    { h: '业务逻辑分析（享乐适应理论）', p: '基于“享乐适应”假设，探讨强制中断（Gate）是否能通过缓解玩家审美疲劳来延长游戏寿命。对比分析了“即时满足”与“适度限制”在提升长期留存方面的业务效果。' },
+                    { h: 'A/B Test 实验设计与数据预处理', p: '使用 R 语言整理数据，处理极值（Outlier）以确保样本代表性。定义 1 日/7 日留存率及总游戏轮数为核心评估指标（KPI），确保实验组与对照组的样本量满足统计效力要求。' },
+                    { h: '统计建模与显著性检验', p: '运用 Bootstrap（自助抽样法）模拟留存率的分布差异，计算不同组别下的置信区间。通过假设检验发现，推迟锁定关卡（Gate 40）会导致七日留存率显著下降。' },
+                    { h: '决策洞察产出', p: '实验证实早期“强制休息”有助于维持玩家的长期兴趣。最终建议维持 Level 30 的关卡设定，为游戏平衡性调整提供了量化的决策支撑，避免了因策略失误导致的用户流失。' }
+                ],
+                icon: 'BarChart' 
+            },
+            { 
+                id: 'qa-5', 
+                category: '数据科学与分析', 
+                title: '酒店预订业务 KPI 分析', 
+                desc: '利用 Python 分析 11.9 万条预订数据，挖掘影响取消率的核心维度并输出定价策略。', 
+                type: 'modal',
+                modalTitle: '酒店预订业务 KPI 量化分析 (Python)',
+                companyName: '11.9万条酒店预订数据深度挖掘',
+                period: '2024.11 - 2024.12',
+                bgTitle: '项目背景',
+                background: '利用 Python 对 Kaggle 平台 11.9 万条酒店真实预订数据进行深度挖掘。通过对大规模数据的清洗与分析，识别影响订单取消的关键业务因素，为酒店优化定价与取消政策提供量化支持。',
+                details: [
+                    { h: '数据清洗与特征工程', p: '使用 Pandas 处理缺失值与异常数据，针对“提前预订天数”、“客源渠道”等维度进行特征提取与分类，确保了后续分析的数据质量。' },
+                    { h: '核心 KPI 关联性挖掘', p: '利用 Seaborn 与 Matplotlib 绘制热力图与箱线图，量化分析了 ADR（日均房价）与订单取消率之间的关联，精准识别出高价格敏感度的细分客群。' },
+                    { h: '业务维度拆解与可视化', p: '针对不同月份、押金类型及客户类型构建分析看板。通过数据对比，量化了“无押金政策”对高客单价订单流失的影响，识别出业务增长中的不确定性风险。' },
+                    { h: '策略建议产出', p: '基于分析结果建议酒店针对特定季节实施动态取消费用政策，并为提前预订周期较长的订单设计梯度定价保护方案，以降低平均取消率。' }
+                ],
+                icon: 'BarChart' 
+            },
+            { 
+                id: 'ai-1', 
+                category: 'AI 实验室', 
+                title: 'BnB Scheduler 校园排程平台', 
+                desc: '整合教务底层数据，构建适配移动端的全场景智能排程与自习资源动态索引系统。', 
+                type: 'modal',
+                modalTitle: 'BnB Scheduler：校园全场景智能排程与资源管理平台',
+                companyName: '全场景智能排程与资源管理平台',
+                period: '2026.01 - 至今',
+                bgTitle: '项目背景（基于学生痛点设计）',
+                background: '官方系统移动端交互缺失：校内教务系统在手机端适配极差，学生在通勤或课间查看课表、确认教室的操作链条过长。\n\n自习资源“盲盒”现状：学生寻找空闲自习室或讨论空间时，往往需要逐层扫楼，面临严重的资源信息不对称和时间浪费。\n\n日程信息碎片化：课程表、考试安排、临时调课信息分散在不同平台，缺乏一个统一的轻量化管理入口。',
+                details: [
+                    { h: '全适配移动端教务看板', p: '整合教务系统底层数据，将其转化为符合移动端操作直觉的轻量化看板。通过响应式设计，实现课程、地点、教师信息的秒开查询，彻底解决了官方系统在手机上加载慢、缩放难的交互痛点。' },
+                    { h: '实时空置资源检索系统', p: '建立校园教室占用状态的动态索引模块。学生可根据特定时间段一键筛选“当前可用”或“即将空置”的教室资源，将“盲找自习室”的行为数字化、效率化，大幅优化了物理空间的使用率。' },
+                    { h: '个性化日程聚合与预警', p: '集成课程变动、考勤提醒与重要学期节点管理功能。通过直观的时间轴布局展示每日动线，确保学生在碎片化时间内能精准获取关键行程，降低了因信息疏漏导致的误课风险。' },
+                    { h: '校园生活流式交互界面', p: '摒弃繁琐的层级菜单，采用极简的流式布局展示校园生活高频信息。通过产品层面的减法设计，为用户提供“无压”的使用体验，成为学生日常学业管理的首选工具。' }
+                ],
+                icon: 'Wand' 
+            }
+        ];
+
+        const CATEGORIES = ['市场调研与战略', '营销策划与运营', '数据科学与分析', 'AI 实验室'];
+
+        const Sidebar = () => e('aside', { className: 'sidebar' },
+            e('div', { className: 'side-title-section' },
+                e('h1', null, '陈欣禧'),
+                e('p', { className: 'profile-title' }, 'CHEN XINXI')
+            ),
+
+            e('div', { className: 'side-section' },
+                e('p', { className: 'side-label' }, 'ACADEMIC'),
+                e('p', { className: 'side-text' }, '北师香港浸会大学'),
+                e('p', { className: 'side-text' }, '商业分析'),
+                e('p', { className: 'side-text' }, 'GPA 3.65 (排名 3/49)')
+            ),
+
+            e('div', { className: 'side-section' },
+                e('p', { className: 'side-label' }, 'LANGUAGE'),
+                e('p', { className: 'side-text' }, '粤语、英语 CET-6 602')
+            ),
+
+            e('div', { className: 'side-section' },
+                e('p', { className: 'side-label' }, 'SKILLS'),
+                e('p', { className: 'side-text' }, 'SQL, PowerBI, Python, R')
+            )
+        );
+
+        const ProjectModal = ({ project, onClose }) => {
+            if (!project) return null;
+            return e('div', { className: 'modal-overlay', onClick: onClose },
+                e('div', { className: 'modal-card', onClick: ev => ev.stopPropagation() },
+                    e('button', { className: 'close-btn', onClick: onClose }, e(Icons.Close)),
+                    e('div', { className: 'modal-left' },
+                        e('h3', { className: 'modal-left-h' }, project.companyName),
+                        project.period && e('p', { className: 'modal-left-meta' }, project.period),
+                        project.role && e('p', { className: 'modal-left-meta' }, project.role),
+                        project.background && e('div', { className: 'modal-left-bg' },
+                            e('p', { className: 'modal-left-bg-title' }, project.bgTitle || '公司背景'),
+                            e('p', { className: 'modal-left-bg-content' }, project.background)
+                        )
+                    ),
+                    e('div', { className: 'modal-right' },
+                        e('h2', { className: 'modal-title' }, project.modalTitle),
+                        project.details && project.details.map((item, idx) => e('div', { key: idx, className: 'modal-block' },
+                            e('div', { className: 'modal-block-h' },
+                                e('span', { className: 'modal-block-dot' }, '•'),
+                                item.h
+                            ),
+                            e('p', { className: 'modal-block-p' }, item.p)
+                        ))
+                    )
+                )
+            );
+        };
+
+        const App = () => {
+            useCursor();
+            const [cat, setCat] = useState(CATEGORIES[0]);
+            const [sel, setSel] = useState(null);
+            const filtered = useMemo(() => PROJECT_DATA.filter(p => p.category === cat), [cat]);
+
+            return e('div', { style: { display: 'flex' }, className: 'app-container' },
+                e(Sidebar),
+                e('main', { className: 'main-content' },
+                    e('nav', { className: 'nav-bar' },
+                        CATEGORIES.map(c => e('button', { key: c, className: `nav-btn ${cat === c ? 'active' : ''}`, onClick: () => setCat(c) }, c))
+                    ),
+                    e('div', { className: 'project-grid' },
+                        filtered.map(p => e('div', { key: p.id, className: 'project-card', onClick: () => p.type === 'modal' ? setSel(p) : null },
+                            e('div', { className: 'card-icon-container' },
+                                e(Icons[p.icon] || Icons.Globe),
+                                e(Icons.ArrowUpRight)
+                            ),
+                            e('h3', { className: 'p-title' }, p.title),
+                            e('p', { className: 'p-desc' }, p.desc)
+                        ))
+                    )
+                ),
+                e(ProjectModal, { project: sel, onClose: () => setSel(null) })
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(e(App));
+    </script>
+</body>
+
+</html>
