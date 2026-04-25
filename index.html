@@ -421,6 +421,65 @@
             background: var(--bg-side);
             transform: rotate(90deg) scale(1.1);
         }
+        @media (max-width: 768px) {
+            .app-container { flex-direction: column; }
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 40px 24px;
+                border-right: none;
+                border-bottom: 1px solid rgba(116, 96, 151, 0.08);
+            }
+            .side-title-section { margin-bottom: 32px; }
+            .side-section { margin-bottom: 24px; }
+            .main-content { margin-left: 0; }
+            .nav-bar {
+                padding: 0 24px;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+            }
+            .nav-bar::-webkit-scrollbar { display: none; }
+            .nav-btn { margin-right: 24px; }
+            .project-grid {
+                grid-template-columns: 1fr;
+                padding: 24px;
+                gap: 24px;
+            }
+            .project-card { padding: 24px; }
+            .modal-card {
+                flex-direction: column;
+                width: 92vw;
+                height: 85vh;
+                overflow-y: auto;
+            }
+            .modal-left {
+                width: 100%;
+                padding: 32px 24px 24px 24px;
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            }
+            .modal-right {
+                width: 100%;
+                padding: 24px;
+                overflow-y: visible;
+            }
+            .close-btn {
+                top: 16px;
+                right: 16px;
+                width: 32px;
+                height: 32px;
+            }
+            .modal-title {
+                font-size: 24px;
+                margin-bottom: 32px;
+            }
+            .modal-link {
+                margin-top: -16px;
+                margin-bottom: 32px;
+            }
+        }
     </style>
 </head>
 
