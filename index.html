@@ -107,7 +107,7 @@
             left: 0;
             top: 0;
             background: var(--bg-side);
-            padding: 80px 48px;
+            padding: 64px 48px;
             display: flex;
             flex-direction: column;
             z-index: 40;
@@ -116,7 +116,7 @@
         }
 
         .side-title-section {
-            margin-bottom: 56px;
+            margin-bottom: 40px;
         }
 
         .side-title-section h1 {
@@ -137,7 +137,7 @@
         }
 
         .side-section {
-            margin-bottom: 36px;
+            margin-bottom: 28px;
         }
 
         .side-label {
@@ -376,6 +376,44 @@
             margin-bottom: 36px;
         }
 
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .gallery-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .gallery-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .gallery-img, .gallery-video {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            background: #f0f0f0;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-caption {
+            font-size: 12px;
+            color: var(--color-grey);
+            text-align: center;
+            font-weight: 500;
+        }
+
         .modal-block-h {
             font-size: 17px;
             font-weight: 700;
@@ -421,8 +459,12 @@
             background: var(--bg-side);
             transform: rotate(90deg) scale(1.1);
         }
+
         @media (max-width: 768px) {
-            .app-container { flex-direction: column; }
+            .app-container {
+                flex-direction: column;
+            }
+
             .sidebar {
                 position: relative;
                 width: 100%;
@@ -431,50 +473,76 @@
                 border-right: none;
                 border-bottom: 1px solid rgba(116, 96, 151, 0.08);
             }
-            .side-title-section { margin-bottom: 32px; }
-            .side-section { margin-bottom: 24px; }
-            .main-content { margin-left: 0; }
+
+            .side-title-section {
+                margin-bottom: 32px;
+            }
+
+            .side-section {
+                margin-bottom: 24px;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
             .nav-bar {
                 padding: 0 24px;
                 overflow-x: auto;
                 white-space: nowrap;
                 -webkit-overflow-scrolling: touch;
             }
-            .nav-bar::-webkit-scrollbar { display: none; }
-            .nav-btn { margin-right: 24px; }
+
+            .nav-bar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-btn {
+                margin-right: 24px;
+            }
+
             .project-grid {
                 grid-template-columns: 1fr;
                 padding: 24px;
                 gap: 24px;
             }
-            .project-card { padding: 24px; }
+
+            .project-card {
+                padding: 24px;
+            }
+
             .modal-card {
                 flex-direction: column;
                 width: 92vw;
                 height: 85vh;
                 overflow-y: auto;
             }
+
             .modal-left {
                 width: 100%;
                 padding: 32px 24px 24px 24px;
                 border-right: none;
                 border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             }
+
             .modal-right {
                 width: 100%;
                 padding: 24px;
                 overflow-y: visible;
             }
+
             .close-btn {
                 top: 16px;
                 right: 16px;
                 width: 32px;
                 height: 32px;
             }
+
             .modal-title {
                 font-size: 24px;
                 margin-bottom: 32px;
             }
+
             .modal-link {
                 margin-top: -16px;
                 margin-bottom: 32px;
@@ -756,11 +824,11 @@
                 ],
                 icon: 'BarChart'
             },
-            { 
-                id: 'qa-2', 
-                category: '数据科学与分析', 
-                title: 'SQL 酒店订单系统', 
-                desc: '主导酒店后台订单查询系统底层架构，通过规范化逻辑建模实现高效检索。', 
+            {
+                id: 'qa-2',
+                category: '数据科学与分析',
+                title: 'SQL 酒店订单系统',
+                desc: '主导酒店后台订单查询系统底层架构，通过规范化逻辑建模实现高效检索。',
                 type: 'modal',
                 modalTitle: 'SQL 酒店订单查询系统开发',
                 companyName: '底层数据库架构与 SQL 查询逻辑开发',
@@ -772,13 +840,13 @@
                     { h: 'SQL 查询逻辑开发', p: '主导核心业务逻辑的 SQL 编写，涵盖订单多条件筛选、实时库存校验及多表关联聚合分析。通过查询语句优化与索引设置，显著提升了大规模数据下的检索响应速度。' },
                     { h: '全栈模块集成与系统联动', p: '配合前端 HTML 页面完成数据接口调用与系统集成，实现了预订订单的一站式高效检索。将枯燥的底层数据转化为直观的查询结果，验证了系统在实际业务场景中的应用价值。' }
                 ],
-                icon: 'Cpu' 
+                icon: 'Cpu'
             },
-            { 
-                id: 'qa-3', 
-                category: '数据科学与分析', 
-                title: '机器学习：基于 CNN 的服装图像识别模型', 
-                desc: '构建基于 Fashion-MNIST 的多层卷积神经网络，实现自动化服装分类。', 
+            {
+                id: 'qa-3',
+                category: '数据科学与分析',
+                title: '机器学习：基于 CNN 的服装图像识别模型',
+                desc: '构建基于 Fashion-MNIST 的多层卷积神经网络，实现自动化服装分类。',
                 type: 'modal',
                 modalTitle: '机器学习：基于 CNN 的服装图像识别模型',
                 companyName: 'Fashion-MNIST 数据集深度学习实战',
@@ -790,13 +858,13 @@
                     { h: '训练与参数优化', p: '采用 Adam 优化器与交叉熵损失函数 (Cross-Entropy Loss)。通过设置验证集进行超参数调优（如 Batch Size、学习率衰减），在保证收敛速度的同时提升了模型的泛化精度。' },
                     { h: '性能评估与分析', p: '模型在测试集上的识别准确率达到 90.6%。通过分析混淆矩阵发现模型对“衬衫”与“外套”等相似类别的区分难点，并以此为依据进一步优化了网络深度。' }
                 ],
-                icon: 'Cpu' 
+                icon: 'Cpu'
             },
-            { 
-                id: 'qa-4', 
-                category: '数据科学与分析', 
-                title: '移动游戏关卡策略 A/B Test', 
-                desc: '使用 R 语言处理海量玩家行为数据，通过 Bootstrap 与假设检验分析关卡锁定对留存率的影响。', 
+            {
+                id: 'qa-4',
+                category: '数据科学与分析',
+                title: '移动游戏关卡策略 A/B Test',
+                desc: '使用 R 语言处理海量玩家行为数据，通过 Bootstrap 与假设检验分析关卡锁定对留存率的影响。',
                 type: 'modal',
                 modalTitle: '移动游戏关卡策略 A/B Test',
                 companyName: '移动游戏关卡策略 A/B Test：基于 Cookie Cats 数据的留存研究',
@@ -809,13 +877,13 @@
                     { h: '统计建模与显著性检验', p: '运用 Bootstrap（自助抽样法）模拟留存率的分布差异，计算不同组别下的置信区间。通过假设检验发现，推迟锁定关卡（Gate 40）会导致七日留存率显著下降。' },
                     { h: '决策洞察产出', p: '实验证实早期“强制休息”有助于维持玩家的长期兴趣。最终建议维持 Level 30 的关卡设定，为游戏平衡性调整提供了量化的决策支撑，避免了因策略失误导致的用户流失。' }
                 ],
-                icon: 'BarChart' 
+                icon: 'BarChart'
             },
-            { 
-                id: 'qa-5', 
-                category: '数据科学与分析', 
-                title: '酒店预订业务 KPI 分析', 
-                desc: '利用 Python 分析 11.9 万条预订数据，挖掘影响取消率的核心维度并输出定价策略。', 
+            {
+                id: 'qa-5',
+                category: '数据科学与分析',
+                title: '酒店预订业务 KPI 分析',
+                desc: '利用 Python 分析 11.9 万条预订数据，挖掘影响取消率的核心维度并输出定价策略。',
                 type: 'modal',
                 modalTitle: '酒店预订业务 KPI 量化分析 (Python)',
                 companyName: '11.9万条酒店预订数据深度挖掘',
@@ -828,13 +896,13 @@
                     { h: '业务维度拆解与可视化', p: '针对不同月份、押金类型及客户类型构建分析看板。通过数据对比，量化了“无押金政策”对高客单价订单流失的影响，识别出业务增长中的不确定性风险。' },
                     { h: '策略建议产出', p: '基于分析结果建议酒店针对特定季节实施动态取消费用政策，并为提前预订周期较长的订单设计梯度定价保护方案，以降低平均取消率。' }
                 ],
-                icon: 'BarChart' 
+                icon: 'BarChart'
             },
-            { 
-                id: 'ai-1', 
-                category: 'AI 实验室', 
-                title: 'BnB Scheduler 校园排程平台', 
-                desc: '整合教务底层数据，构建适配移动端的全场景智能排程与自习资源动态索引系统。', 
+            {
+                id: 'ai-1',
+                category: 'AI 实验室',
+                title: 'BnB Scheduler 校园排程平台',
+                desc: '整合教务底层数据，构建适配移动端的全场景智能排程与自习资源动态索引系统。',
                 type: 'modal',
                 modalTitle: 'BnB Scheduler：校园全场景智能排程与资源管理平台',
                 link: 'https://www.bnbscheduler.top',
@@ -847,6 +915,28 @@
                     { h: '实时空置资源检索系统', p: '建立校园教室占用状态的动态索引模块。学生可根据特定时间段一键筛选“当前可用”或“即将空置”的教室资源，将“盲找自习室”的行为数字化、效率化，大幅优化了物理空间的使用率。' },
                     { h: '个性化日程聚合与预警', p: '集成课程变动、考勤提醒与重要学期节点管理功能。通过直观的时间轴布局展示每日动线，确保学生在碎片化时间内能精准获取关键行程，降低了因信息疏漏导致的误课风险。' },
                     { h: '校园生活流式交互界面', p: '摒弃繁琐的层级菜单，采用极简的流式布局展示校园生活高频信息。通过产品层面的减法设计，为用户提供“无压”的使用体验，成为学生日常学业管理的首选工具。' }
+                ],
+                icon: 'Wand'
+            },
+            { 
+                id: 'ai-2', 
+                category: 'AI 实验室', 
+                title: '利用AI设计营销物料', 
+                desc: '利用 AIGC 工具高效生成符合非洲市场偏好的宣传海报、手册及视频。', 
+                type: 'modal',
+                modalTitle: '利用 AI 设计营销物料',
+                companyName: 'Go Terra (Internship)',
+                period: '2025.06 - 2025.09',
+                bgTitle: '项目背景',
+                background: '主要根据非洲群体喜好以及上级需求，通过AIGC和可画等工具生成宣传物料，包括宣传海报、宣传手册、宣传视频。',
+                details: [
+                    { p: '宣传海报、手册、双语视频' }
+                ],
+                media: [
+                    { type: 'image', url: './assets/marketing/poster-en.png', caption: '英语宣传海报' },
+                    { type: 'image', url: './assets/marketing/brochure-fr.png', caption: '法语宣传手册' },
+                    { type: 'video', url: './assets/marketing/video-en-long.mp4', caption: '英语营销视频（完整长版）' },
+                    { type: 'video', url: './assets/marketing/video-fr-short.mp4', caption: '法语营销视频（精华短版）' }
                 ],
                 icon: 'Wand' 
             }
@@ -865,6 +955,11 @@
                 e('p', { className: 'side-text' }, '北师香港浸会大学'),
                 e('p', { className: 'side-text' }, '商业分析'),
                 e('p', { className: 'side-text' }, 'GPA 3.65 (排名 3/49)')
+            ),
+
+            e('div', { className: 'side-section' },
+                e('p', { className: 'side-label' }, 'COURSES'),
+                e('p', { className: 'side-text' }, '市场营销、经济学、运筹学、机器学习、R统计、数据库管理、会计原理、优化算法、大数据处理')
             ),
 
             e('div', { className: 'side-section' },
@@ -894,17 +989,29 @@
                     ),
                     e('div', { className: 'modal-right' },
                         e('h2', { className: 'modal-title' }, project.modalTitle),
-                        project.link && e('a', { className: 'modal-link', href: project.link, target: '_blank', rel: 'noopener noreferrer' }, 
+                        project.link && e('a', { className: 'modal-link', href: project.link, target: '_blank', rel: 'noopener noreferrer' },
                             e(Icons.Globe),
                             project.link.replace('https://', '')
                         ),
                         project.details && project.details.map((item, idx) => e('div', { key: idx, className: 'modal-block' },
-                            e('div', { className: 'modal-block-h' },
+                            item.h && e('div', { className: 'modal-block-h' },
                                 e('span', { className: 'modal-block-dot' }, '•'),
                                 item.h
                             ),
                             e('p', { className: 'modal-block-p' }, item.p)
-                        ))
+                        )),
+                        project.media && e('div', { className: 'modal-gallery' },
+                            project.media.map((m, idx) => m.type === 'image' ? 
+                                e('div', { key: idx, className: 'gallery-item' },
+                                    e('img', { src: m.url, alt: m.caption, className: 'gallery-img' }),
+                                    e('p', { className: 'gallery-caption' }, m.caption)
+                                ) :
+                                e('div', { key: idx, className: 'gallery-item full-width' },
+                                    e('video', { src: m.url, controls: true, className: 'gallery-video' }),
+                                    e('p', { className: 'gallery-caption' }, m.caption)
+                                )
+                            )
+                        )
                     )
                 )
             );
