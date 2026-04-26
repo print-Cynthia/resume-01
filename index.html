@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
     <meta name="supported-color-schemes" content="light">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <title>陈欣禧 | Professional Portfolio</title>
     <!-- Fonts -->
     <!-- Using Apple Native System Fonts -->
@@ -54,11 +55,13 @@
 
         html,
         body {
-            background-color: #FFFFFF !important;
-            background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF) !important; /* 渐变色黑科技，尝试绕过反色算法 */
+            background-color: #FFFFFE !important; /* 极接近白色的灰白，骗过算法 */
+            background-image: none !important;
             color: #1D1D1F !important;
-            color-scheme: light only !important; /* 明确声明“仅限浅色” */
+            color-scheme: light only !important;
             forced-color-adjust: none !important;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
             -webkit-text-size-adjust: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
             -webkit-font-smoothing: antialiased;
