@@ -54,10 +54,11 @@
 
         html,
         body {
-            background-color: #FFFFFF !important; /* 物理锁定背景色 */
+            background-color: #FFFFFF !important;
+            background-image: linear-gradient(to bottom, #FFFFFF, #FFFFFF) !important; /* 渐变色黑科技，尝试绕过反色算法 */
             color: #1D1D1F !important;
-            color-scheme: light !important;
-            forced-color-adjust: none !important; /* 禁止浏览器强制调整颜色 */
+            color-scheme: light only !important; /* 明确声明“仅限浅色” */
+            forced-color-adjust: none !important;
             -webkit-text-size-adjust: 100%;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
             -webkit-font-smoothing: antialiased;
@@ -108,7 +109,8 @@
             position: fixed;
             left: 0;
             top: 0;
-            background: var(--bg-side);
+            background: #FBF8FB !important;
+            background-image: linear-gradient(to bottom, #FBF8FB, #FBF8FB) !important;
             padding: 64px 48px;
             display: flex;
             flex-direction: column;
@@ -593,6 +595,19 @@
 
 <body>
     <div id="root"></div>
+
+    <script>
+        // --- 强制浅色模式脚本 ---
+        (function() {
+            const force = () => {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.documentElement.style.colorScheme = 'light';
+            };
+            force();
+            window.addEventListener('DOMContentLoaded', force);
+            window.addEventListener('load', force);
+        })();
+    </script>
 
     <script>
         const { useState, useMemo, useEffect, createElement: e } = React;
