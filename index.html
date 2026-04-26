@@ -463,6 +463,43 @@
             transform: rotate(90deg) scale(1.1);
         }
 
+        /* --- THE ULTIMATE ANTI-DARK MODE RESET --- */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-body: #FFFFFF !important;
+                --bg-side: #FBF8FB !important;
+                --color-side-text: #37313D !important;
+                --color-black: #1D1D1F !important;
+                --color-grey: #8E8E93 !important;
+                --color-primary: #746097 !important;
+                --color-secondary: #AD86AE !important;
+                --color-border: rgba(116, 96, 151, 0.12) !important;
+            }
+            body {
+                background-color: #FFFFFF !important;
+                color: #1D1D1F !important;
+            }
+            .sidebar {
+                background: #FBF8FB !important;
+            }
+            .nav-bar {
+                background: rgba(255, 255, 255, 0.9) !important;
+            }
+            .project-card {
+                background: #FFFFFF !important;
+                border-color: rgba(116, 96, 151, 0.12) !important;
+            }
+            .modal-card {
+                background: #FFFFFF !important;
+            }
+            .modal-left {
+                background: #FBF8FB !important;
+            }
+            .modal-right {
+                background: #FFFFFF !important;
+            }
+        }
+
         @media (max-width: 768px) {
             .app-container {
                 flex-direction: column;
